@@ -1,10 +1,10 @@
 # coding: utf-8
 
 """
-CS579: Assignment 0
+
 Collecting a political social network
 
-In this assignment, I've given you a list of Twitter accounts of 4
+given a list of Twitter accounts of 4
 U.S. presedential candidates.
 
 The goal is to use the Twitter API to construct a social network of these
@@ -37,10 +37,10 @@ import sys
 import time
 from TwitterAPI import TwitterAPI
 
-consumer_key = '7A6PPKpb19NyWqyze5CEbPaeJ'
-consumer_secret = 'hOBGykOkMljDf0qucBClOc5FIr4iOPObwFbd2ApX7ClgFQWZ2H'
-access_token = '721420056740159492-OdISGrcFxQ1O6qdAmtyocvsG7bnJKbr'
-access_token_secret = '4dZZxTBqfFPUBQAOZdIXLVn5m4S4im9Ge0dNfxaA16lTf'
+consumer_key = ''
+consumer_secret = ''
+access_token = ''
+access_token_secret = ''
 
 
 # This method is done for you.
