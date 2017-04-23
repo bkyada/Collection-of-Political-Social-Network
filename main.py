@@ -20,16 +20,10 @@ to plot these links, as well as print some statistics of the resulting graph.
 installed [pip](http://pip.readthedocs.org/en/latest/installing.html), you can
 do this with `pip install networkx TwitterAPI`.
 
-OK, now you're ready to start collecting some data!
 
-I've provided a partial implementation below. Your job is to complete the
-code where indicated.  You need to modify the 10 methods indicated by
-#TODO.
-
-Your output should match the sample provided in Log.txt.
 """
 
-# Imports you'll need.
+
 from collections import Counter
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -43,7 +37,7 @@ access_token = ''
 access_token_secret = ''
 
 
-# This method is done for you.
+
 def get_twitter():
     """ Construct an instance of TwitterAPI using the tokens you entered above.
     Returns:
@@ -66,15 +60,13 @@ def read_screen_names(filename):
     >>> read_screen_names('candidates.txt')
     ['DrJillStein', 'GovGaryJohnson', 'HillaryClinton', 'realDonaldTrump']
     """
-    ###TODO
+    
     with open(filename) as f:
         data = f.read().splitlines() 
     return data
     
 
 
-# I've provided the method below to handle Twitter's rate limiting.
-# You should call this method whenever you need to access the Twitter API.
 def robust_request(twitter, resource, params, max_tries=5):
     """ If a Twitter request fails, sleep for 15 minutes.
     Do this at most max_tries times before quitting.
@@ -115,7 +107,7 @@ def get_users(twitter, screen_names):
     >>> [u['id'] for u in users]
     [6253282, 783214]
     """
-    ###TODO
+    
     request = robust_request(twitter,'users/lookup',{'screen_name':screen_names})
     users = [r for r in request]
     return users
@@ -142,7 +134,7 @@ def get_friends(twitter, screen_name):
     >>> get_friends(twitter, 'aronwc')[:5]
     [695023, 1697081, 8381682, 10204352, 11669522]
     """
-    ###TODO
+    
     request = robust_request(twitter,'friends/ids', {'screen_name': screen_name, 'count':5000})
     friends = [r for r in request]
     return friends
@@ -166,7 +158,7 @@ def add_all_friends(twitter, users):
     >>> users[0]['friends'][:5]
     [695023, 1697081, 8381682, 10204352, 11669522]
     """
-    ###TODO
+    
     for u in users :       
         u['friends'] = get_friends(twitter,u['screen_name'])      
 
@@ -179,7 +171,7 @@ def print_num_friends(users):
     Returns:
         Nothing
     """
-    ###TODO
+    
     for u in users:
         print ('%s %d' %(str(u['screen_name']),len(u['friends'])))
 
@@ -197,7 +189,7 @@ def count_friends(users):
     >>> c.most_common()
     [(2, 3), (3, 2), (1, 1)]
     """
-    ###TODO
+    
     count = Counter()
     for u in users:
         count.update(u['friends'])
@@ -225,7 +217,7 @@ def friend_overlap(users):
     ...     ])
     [('a', 'c', 3), ('a', 'b', 2), ('b', 'c', 2)]
     """
-    ###TODO
+    
     d=[]
     n = len(users)
     for i in range(n):
@@ -255,7 +247,7 @@ def followed_by_hillary_and_donald(users, twitter):
         A string containing the single Twitter screen_name of the user
         that is followed by both Hillary Clinton and Donald Trump.
     """
-    ###TODO
+    
     request = robust_request(twitter,'friends/ids',{'screen_name':'HillaryClinton'})
     followersH = [r for r in request]
     request = robust_request(twitter,'friends/ids',{'screen_name':'realDonaldTrump'})
@@ -286,7 +278,7 @@ def create_graph(users, friend_counts):
     Returns:
       A networkx Graph
     """
-    ###TODO
+    
     common_friend = []
     sorted_counts = sorted(friend_counts.items(), key=lambda x: x[1], reverse=True)
     for items in sorted_counts:
@@ -316,7 +308,7 @@ def draw_network(graph, users, filename):
     Your figure does not have to look exactly the same as mine, but try to
     make it look presentable.
     """
-    ###TODO
+    
     screen_name=[]
     for u in users:
         screen_name.append(u['screen_name'])
@@ -356,4 +348,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-# That's it for now! This should give you an introduction to some of the data we'll study in this course.
